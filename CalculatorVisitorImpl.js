@@ -40,7 +40,7 @@ export default class CalculatorVisitorImpl extends CalculatorVisitor {
             const value = this.map.get(id);
             return this.map.get(id);
         }
-        return id;
+        return ;
     }
 
 

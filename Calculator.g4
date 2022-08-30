@@ -3,7 +3,7 @@ grammar Calculator;
 /*
  * Parser Rules
  */
-prog: stat+ EOF;
+prog: stat+ NEWLINE? EOF;
 stat: expr # printExpr | ID '=' expr # assign;
 
 expr:
@@ -22,3 +22,4 @@ MUL: '*';
 DIV: '/';
 ADD: '+';
 SUB: '-';
+NEWLINE: ('\r'? '\n' | '\r');

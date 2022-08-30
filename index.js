@@ -4,7 +4,6 @@ import CalculatorLexer from './antlr/CalculatorLexer.js';
 import CalculatorParser from './antlr/CalculatorParser.js';
 import CalculatorVisitorImpl from './CalculatorVisitorImpl.js'
 import { createInterface } from 'readline';
-import { assert } from 'console';
 
 var visitor = new CalculatorVisitorImpl();
 
@@ -30,10 +29,10 @@ readline.on('line', (str) => {
 */
 
 function exec(str) {
-    var chars = new InputStream(str, true)
-    var lexer = new CalculatorLexer(chars);
-    var tokens = new CommonTokenStream(lexer);
-    var parser = new CalculatorParser(tokens);
-    var ast = parser.prog();
+    const chars = new InputStream(str, true)
+    const lexer = new CalculatorLexer(chars);
+    const tokens = new CommonTokenStream(lexer);
+    const parser = new CalculatorParser(tokens);
+    const ast = parser.prog();
     return ast;
 }
