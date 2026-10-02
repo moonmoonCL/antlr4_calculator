@@ -1,16 +1,26 @@
 {
-  "dependencies": {
-    "antlr4": "^4.10.1"
-  },
   "name": "antlr4_calculator",
   "version": "1.0.0",
+  "description": "基于 ANTLR4 的交互式四则运算计算器(支持变量赋值),ANTLR4 JavaScript target 入门示例",
   "main": "index.js",
-  "devDependencies": {},
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "generate": "antlr4 -Dlanguage=JavaScript -visitor Calculator.g4 -o antlr",
+    "start": "node index.js"
   },
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "type": "module"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moonmoonCL/antlr4_calculator.git"
+  },
+  "keywords": [
+    "antlr4",
+    "calculator",
+    "parser",
+    "grammar"
+  ],
+  "author": "moonmoonCL",
+  "license": "MIT",
+  "dependencies": {
+    "antlr4": "^4.10.1"
+  }
 }
