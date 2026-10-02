@@ -11,36 +11,19 @@
 ## 环境要求
 
 - Node.js ≥ 16
-- Java ≥ 8(仅生成解析器代码时需要,见下文)
+- Java ≥ 8(仅修改语法定义后重新生成解析器时需要,见下文)
 
 ## 快速开始
 
 ```bash
-# 1. 安装运行时依赖(antlr4 JS runtime)
+# 安装依赖(antlr4 JS runtime)
 npm install
 
-# 2. 生成解析器代码到 antlr/ 目录(需要 ANTLR 工具,见下一节)
-npm run generate
-
-# 3. 启动
+# 启动
 npm start
 ```
 
-## 生成解析器代码
-
-`index.js` 依赖的词法/语法分析器代码位于 `antlr/` 目录,由语法定义 [Calculator.g4](Calculator.g4) 自动生成,不随仓库分发,克隆后需要生成一次。
-
-**方式一**:按 [ANTLR 官网](https://www.antlr.org/download.html)的安装说明把 `antlr4` 命令配置好(macOS/Linux 下通常是为 `antlr-4.x-complete.jar` 建一个别名),然后:
-
-```bash
-antlr4 -Dlanguage=JavaScript -visitor Calculator.g4 -o antlr
-```
-
-**方式二**:不想配置别名的话,直接下载 [ANTLR 的 complete jar](https://www.antlr.org/download.html) 用 `java -jar` 运行:
-
-```bash
-java -jar antlr-4.13.2-complete.jar -Dlanguage=JavaScript -visitor Calculator.g4 -o antlr
-```
+`antlr/` 目录下已提交由 [Calculator.g4](Calculator.g4) 生成的词法/语法分析器代码,克隆后无需安装 Java、无需本地生成,装好依赖即可直接运行。
 
 ## 使用示例
 
@@ -55,13 +38,29 @@ java -jar antlr-4.13.2-complete.jar -Dlanguage=JavaScript -visitor Calculator.g4
 193
 ```
 
+## 修改语法后重新生成(可选)
+
+只有当你修改了 [Calculator.g4](Calculator.g4) 时,才需要重新生成 `antlr/` 目录下的解析器代码,此时需要 Java 环境:
+
+**方式一**:按 [ANTLR 官网](https://www.antlr.org/download.html)的安装说明把 `antlr4` 命令配置好(macOS/Linux 下通常是为 `antlr-4.x-complete.jar` 建一个别名),然后:
+
+```bash
+npm run generate
+```
+
+**方式二**:不想配置别名的话,直接下载 [ANTLR 的 complete jar](https://www.antlr.org/download.html) 用 `java -jar` 运行:
+
+```bash
+java -jar antlr-4.13.2-complete.jar -Dlanguage=JavaScript -visitor Calculator.g4 -o antlr
+```
+
 ## 项目结构
 
 ```
 Calculator.g4            ANTLR 语法定义(核心,改语法后重新生成即可)
 CalculatorVisitorImpl.js 遍历语法树并求值的 Visitor 实现
 index.js                 REPL 入口:读入一行 → 词法/语法分析 → 求值
-antlr/                   生成产物,已加入 .gitignore,不入库
+antlr/                   由 Calculator.g4 生成的解析器代码(已提交,克隆即可运行)
 ```
 
 ## License
